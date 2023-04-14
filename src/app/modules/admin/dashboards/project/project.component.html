@@ -1,0 +1,320 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="bg-card">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                <!-- Avatar and name -->
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex-0 w-24 h-24 rounded-full overflow-hidden">
+                        <img
+                            class="w-full h-full object-cover"
+                            src="assets/images/avatars/brian-hughes.jpg">
+                    </div>
+
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <ng-container *transloco="let t">
+                            <div class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">{{t('welcome-back')}}, Admin!</div>
+                        </ng-container>
+                        <div class="flex items-center">
+                            <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:bell'"></mat-icon>
+                            <div class="ml-1.5 leading-6 truncate text-secondary">Você tem 2 novas análises para avaliar!</div>
+                        </div>
+                        <div class="max-w-2xl mx-auto w-full mt-3">
+                            <form>
+                                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Pesquisar</label>
+                                <div class="relative">
+                                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <input type="search" id="default-search"
+                                        class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Busque por comarca, UF, caso, número do processo." required>
+                                    <button type="submit"
+                                        class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pesquisar</button>
+                                </div>
+                            </form>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Project selector -->
+            <div
+                class="relative flex self-start pt-2 pb-1 pl-5 pr-4 cursor-pointer overflow-hidden rounded-t-xl border border-b-0 bg-default"
+                matRipple
+                [matMenuTriggerFor]="projectsMenu">
+                <div class="flex items-center">
+                    <div class="overflow-hidden">
+                        <div class="font-medium leading-6 truncate">{{selectedProject}}</div>
+                    </div>
+                    <div class="flex items-center justify-center pl-2">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:chevron-down'"></mat-icon>
+                    </div>
+                </div>
+                <mat-menu
+                    #projectsMenu="matMenu"
+                    [xPosition]="'before'">
+                    <button
+                        mat-menu-item
+                        (click)="selectedProject='Plano de Saúde A'">Plano de Saúde A                    </button>
+                    <button
+                        mat-menu-item
+                        (click)="selectedProject='Plano de Saúde B'">Plano de Saúde B
+                    </button>
+                    <button
+                        mat-menu-item
+                        (click)="selectedProject='Plano de Saúde C'">Plano de Saúde C
+                    </button>
+                    <button
+                        mat-menu-item
+                        (click)="selectedProject='Plano de Saúde D'">Plano de Saúde D
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
+        <div class="w-full max-w-screen-xl mx-auto">
+            <!-- Tabs -->
+            <mat-tab-group
+                class="sm:px-2"
+                mat-stretch-tabs="false"
+                [animationDuration]="'0'">
+
+                <!-- Home -->
+                <mat-tab label="Visão Geral">
+                    <ng-template matTabContent>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
+                            <!-- Summary -->
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Processos em andamento</div>
+                                    <div class="ml-2 -mt-2 -mr-3">
+                                        <button
+                                            mat-icon-button
+                                            [matMenuTriggerFor]="summaryMenu">
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                                        </button>
+                                        <mat-menu #summaryMenu="matMenu">
+                                            <button mat-menu-item>Ontem</button>
+                                            <button mat-menu-item>2 dias atras</button>
+                                            <button mat-menu-item>3 dias atras</button>
+                                        </mat-menu>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-center mt-2">
+                                    <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">21</div>
+                                    <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Em Avaliação</div>
+                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                                        <div class="text-md font-medium truncate">Completados Hoje:</div>
+                                        <div class="ml-1.5 text-lg font-semibold">13</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Overdue -->
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Tempo médio em Resolução</div>
+                                    <div class="ml-2 -mt-2 -mr-3">
+                                        <button
+                                            mat-icon-button
+                                            [matMenuTriggerFor]="overdueMenu">
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                                        </button>
+                                        <mat-menu #overdueMenu="matMenu">
+                                            <button mat-menu-item>Ontem</button>
+                                            <button mat-menu-item>2 dias atras</button>
+                                            <button mat-menu-item>3 dias atras</button>
+                                        </mat-menu>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-center mt-2">
+                                    <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-red-500">56</div>
+                                    <div class="text-lg font-medium text-red-600 dark:text-red-500">Dias</div>
+                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                                        <div class="text-md font-medium truncate">Última Atualização:</div>
+                                        <div class="ml-1.5 text-lg font-semibold">14/04/2023</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Issues -->
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Processo Aprovados</div>
+                                    <div class="ml-2 -mt-2 -mr-3">
+                                        <button
+                                            mat-icon-button
+                                            [matMenuTriggerFor]="issuesMenu">
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                                        </button>
+                                        <mat-menu #issuesMenu="matMenu">
+                                <button mat-menu-item>Ontem</button>
+                                <button mat-menu-item>2 dias atras</button>
+                                <button mat-menu-item>3 dias atras</button>
+                                        </mat-menu>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-center mt-2">
+                                    <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500"> 150</div>
+                                    <div class="text-lg font-medium text-amber-600 dark:text-amber-500">Aprovados</div>
+                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                                        <div class="text-md font-medium truncate">Média de Aprovação:</div>
+                                        <div class="ml-1.5 text-lg font-semibold">25%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Features -->
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Processos Negados</div>
+                                    <div class="ml-2 -mt-2 -mr-3">
+                                        <button
+                                            mat-icon-button
+                                            [matMenuTriggerFor]="featuresMenu">
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                                        </button>
+                                        <mat-menu #featuresMenu="matMenu">
+                                    <button mat-menu-item>Ontem</button>
+                                    <button mat-menu-item>2 dias atras</button>
+                                    <button mat-menu-item>3 dias atras</button>
+                                        </mat-menu>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-center mt-2">
+                                    <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-green-500">38</div>
+                                    <div class="text-lg font-medium text-green-600 dark:text-green-500">Negados</div>
+                                    <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                                        <div class="text-md font-medium truncate">Percentual Médio:</div>
+                                        <div class="ml-1.5 text-lg font-semibold">20%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Budget details -->
+                        <div class="sm:col-span-6 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden gap-4 w-full min-w-0 mt-8">
+                            <div class="text-lg font-medium tracking-tight leading-6 truncate">Visão por Processo</div>
+                            <div class="flex flex-col flex-auto mt-2 overflow-x-auto">
+                                <table class="min-w-240 overflow-y-visible" mat-table [dataSource]="data.budgetDetails.rows">
+
+                                    <!-- Type -->
+                                    <ng-container matColumnDef="type" sticky>
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            Tipo de Processo
+                                        </th>
+                                        <td mat-cell *matCellDef="let budget">
+                                            <span class="flex items-center">
+                                                <span class="w-2 h-2 rounded-full"
+                                                    [ngClass]="{'bg-blue-500': budget.id === 1,
+                                                                                                                            'bg-red-500': budget.id === 2,
+                                                                                                                            'bg-green-500': budget.id === 3,
+                                                                                                                            'bg-amber-500': budget.id === 4,
+                                                                                                                            'bg-indigo-500': budget.id === 5}"></span>
+                                                <span class="ml-3 leading-4">{{budget.type}}</span>
+                                            </span>
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Total -->
+                                    <ng-container matColumnDef="total">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            Processos Aprovados (R$)
+                                        </th>
+                                        <td mat-cell *matCellDef="let budget">
+                                            <span class="font-medium text-right">
+                                                {{budget.total | currency:'BRL'}}
+                                            </span>
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Expenses amount -->
+                                    <ng-container matColumnDef="expensesAmount">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            Processos Negados (R$)
+                                        </th>
+                                        <td mat-cell *matCellDef="let budget">
+                                            {{budget.expensesAmount | currency:'BRL'}}
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Expenses percentage -->
+                                    <ng-container matColumnDef="expensesPercentage">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            Percentual de Negação
+                                        </th>
+                                        <td mat-cell *matCellDef="let budget">
+                                            {{budget.expensesPercentage}}%
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Remaining amount -->
+                                    <ng-container matColumnDef="remainingAmount">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            Percentual de Liberação
+                                        </th>
+                                        <td mat-cell *matCellDef="let budget">
+                                            {{budget.remainingAmount}}%
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Remaining percentage -->
+                                    <ng-container matColumnDef="remainingPercentage">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            Assertividade do Algoritmo
+                                        </th>
+                                        <td mat-cell *matCellDef="let budget">
+                                            <span class="flex items-center">
+                                                <span>
+                                                    <!-- Low -->
+                                                    <span class="flex items-end w-1 h-4 bg-red-200 rounded overflow-hidden"
+                                                        *ngIf="budget.remainingPercentage < 30">
+                                                        <span class="flex w-full h-1/3 bg-red-600"></span>
+                                                    </span>
+                                                    <!-- Medium -->
+                                                    <span class="flex items-end w-1 h-4 bg-orange-200 rounded overflow-hidden"
+                                                        *ngIf="budget.remainingPercentage >= 30 && budget.remainingPercentage < 80">
+                                                        <span class="flex w-full h-2/4 bg-orange-400"></span>
+                                                    </span>
+                                                    <!-- High -->
+                                                    <span class="flex items-end w-1 h-4 bg-green-100 rounded overflow-hidden"
+                                                        *ngIf="budget.remainingPercentage >= 80">
+                                                        <span class="flex w-full h-full bg-green-400"></span>
+                                                    </span>
+                                                </span>
+                                                <span class="ml-3 leading-4">{{budget.remainingPercentage}}%</span>
+                                            </span>
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="data.budgetDetails.columns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: data.budgetDetails.columns;"></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </ng-template>
+                </mat-tab>
+
+
+            </mat-tab-group>
+        </div>
+    </div>
+
+</div>
